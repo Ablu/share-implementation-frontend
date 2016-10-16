@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
 import {StorageNode} from "./entities/storagenode";
 import {FindResult} from "./entities/foundresult";
+import {Config} from "./config";
 
 @Injectable()
 export class ShareService {
@@ -35,7 +36,7 @@ export class ShareService {
     }
 
     private createWebsocketConnection() {
-        this.websocket = new WebSocket('ws://' + location.hostname + ':9456/');
+        this.websocket = new WebSocket(Config.apiHost);
         this.websocket.addEventListener('message', (message) => {
             this.onMessage(message);
         });
